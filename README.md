@@ -2,9 +2,41 @@
 
 > **From Zero to CLI Wizard** — Master every feature of the GitHub Copilot CLI through interactive lessons, quizzes, scenarios, and challenges.
 
-## 🚀 Quick Start
+## ⚡ Install as a Copilot CLI Skill
+
+One command — works instantly inside the GitHub Copilot CLI:
 
 ```bash
+curl -sSL https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/install.sh | bash
+```
+
+Then open the Copilot CLI and say **"cliexpert"** to start training.
+
+<details>
+<summary>📋 Manual Installation</summary>
+
+```bash
+mkdir -p ~/.copilot/skills/cli-mastery
+curl -sSL https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/SKILL.md \
+  -o ~/.copilot/skills/cli-mastery/SKILL.md
+```
+
+</details>
+
+## 🎮 Two Ways to Learn
+
+| Mode | What it is | How to use |
+|------|-----------|------------|
+| **🤖 Copilot CLI Skill** | AI-powered trainer inside your CLI sessions | Install above, then say "cliexpert" |
+| **🐍 Standalone Python App** | Interactive terminal app with gamification | `python3 mastery.py` |
+
+Both cover the same 8-module curriculum. The skill works conversationally inside the Copilot CLI. The Python app adds a visual terminal UI with achievements, XP tracking, and a certification exam.
+
+## 🚀 Standalone Quick Start
+
+```bash
+git clone https://github.com/DUBSOpenHub/copilot-cli-mastery.git
+cd copilot-cli-mastery
 python3 mastery.py
 ```
 
