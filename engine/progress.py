@@ -162,6 +162,12 @@ class Progress:
 
     def visit_section(self, section_id):
         self.sections_visited.add(section_id)
+        all_sections = {
+            "slash_commands", "keyboard_shortcuts", "modes", "agents",
+            "skills", "mcp", "advanced", "configuration",
+        }
+        if all_sections.issubset(self.sections_visited):
+            self.unlock("explorer")
         self.save()
 
     def unlock(self, achievement_id):
@@ -240,10 +246,22 @@ class Progress:
             if ach_id not in self.achievements and check():
                 self.unlock(ach_id)
 
+        # Module-specific mastery achievements
+        if "slash_commands" in self.completed_lessons:
+            self.unlock("slash_master")
+        if "keyboard_shortcuts" in self.completed_lessons:
+            self.unlock("shortcut_master")
+
+        # Scenario master: check all 8 module scenarios completed
+        all_scenarios = {
+            "slash_workflow", "shortcuts_efficiency", "mode_selection",
+            "agent_orchestration", "skill_workflow", "mcp_setup",
+            "expert_workflow", "config_setup",
+        }
+        if all_scenarios.issubset(self.completed_scenarios):
+            self.unlock("scenario_master")
+
         # Check all modules complete
         all_mods = {"slash_commands", "keyboard_shortcuts", "modes", "agents", "skills", "mcp", "advanced", "config"}
         if all_mods.issubset(self.completed_lessons):
             self.unlock("all_modules")
-            self.unlock("slash_master")
-            self.unlock("shortcut_master")
-            self.unlock("scenario_master")

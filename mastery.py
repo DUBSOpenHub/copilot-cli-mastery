@@ -17,9 +17,9 @@ import textwrap
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from engine.ui import (
-    C, clear, show_splash, hr_fancy, hr, menu, pause, box, info_box,
-    print_centered, progress_bar, print_tip, print_success, type_text,
-    print_shortcut, print_command, print_difficulty
+    C, clear, show_splash as _ui_splash, hr_fancy, hr, menu, pause, box,
+    info_box, print_centered, progress_bar, print_tip, print_success,
+    type_text, print_shortcut, print_command, print_difficulty
 )
 from engine.progress import Progress, ACHIEVEMENTS, LEVEL_THRESHOLDS
 
@@ -404,8 +404,7 @@ def main():
 
 def show_splash(progress):
     """Show splash screen with animation."""
-    from engine.ui import show_splash as _splash
-    _splash()
+    _ui_splash()
 
     if progress.xp > 0:
         info = progress.get_level_info()
