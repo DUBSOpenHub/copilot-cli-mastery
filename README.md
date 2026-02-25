@@ -1,135 +1,65 @@
-# 🎓 Copilot CLI Mastery — Interactive Training System
+# 🎓 Copilot CLI Mastery
 
 > **From Zero to CLI Wizard** — Master every feature of the GitHub Copilot CLI through interactive lessons, quizzes, scenarios, and challenges.
 >
-> <img width="811" height="232" alt="Screenshot 2026-02-24 at 11 45 08 PM" src="https://github.com/user-attachments/assets/29d29246-5931-4218-9639-7d49e8bb064f" />
+> <img width="811" height="232" alt="Screenshot 2026-02-24 at 11 45 08 PM" src="https://github.com/user-attachments/assets/29d29246-5931-4218-9639-7d49e8bb064f" />
 
-
-## ⚡ Install as a Copilot CLI Skill
-
-One command — works instantly inside the GitHub Copilot CLI:
+## ⚡ Install
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/install.sh | bash
+mkdir -p ~/.copilot/skills/cli-mastery/curriculum
+curl -sSL https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/SKILL.md \
+  -o ~/.copilot/skills/cli-mastery/SKILL.md
+for f in module-1-slash-commands module-2-keyboard-shortcuts module-3-modes module-4-agents module-5-skills module-6-mcp module-7-advanced module-8-configuration scenarios final-exam; do
+  curl -sSL "https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/curriculum/${f}.md" \
+    -o ~/.copilot/skills/cli-mastery/curriculum/${f}.md
+done
 ```
 
 Then open the Copilot CLI and say **"cliexpert"** to start training.
 
-<details>
-<summary>📋 Manual Installation</summary>
-
-```bash
-mkdir -p ~/.copilot/skills/cli-mastery
-curl -sSL https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/SKILL.md \
-  -o ~/.copilot/skills/cli-mastery/SKILL.md
-```
-
-</details>
-
-## 🎮 Two Ways to Learn
-
-| Mode | What it is | How to use |
-|------|-----------|------------|
-| **🤖 Copilot CLI Skill** | AI-powered trainer inside your CLI sessions | Install above, then say "cliexpert" |
-| **🐍 Standalone Python App** | Interactive terminal app with gamification | `python3 mastery.py` |
-
-Both cover the same 8-module curriculum. The skill works conversationally inside the Copilot CLI. The Python app adds a visual terminal UI with achievements, XP tracking, and a certification exam.
-
-## 🚀 Standalone Quick Start
-
-```bash
-git clone https://github.com/DUBSOpenHub/copilot-cli-mastery.git
-cd copilot-cli-mastery
-python3 mastery.py
-```
-
-No dependencies required — runs on Python 3.6+ with only standard library modules.
-
-## 📚 What's Inside
-
-### 8 Comprehensive Training Modules
+## 📚 8 Training Modules
 
 | # | Module | Topics | Difficulty |
 |---|--------|--------|------------|
-| 1 | **Slash Commands** | All 35+ commands, organized by category | 🟢→🔴 |
-| 2 | **Keyboard Shortcuts** | 20+ shortcuts with muscle-memory training | 🟢→🟡 |
-| 3 | **Interaction Modes** | Interactive, Plan, Autopilot — when to use each | 🟢→🟡 |
+| 1 | **Slash Commands** | All 41 commands across 8 categories | 🟢→🔴 |
+| 2 | **Keyboard Shortcuts** | 19 shortcuts with muscle-memory training | 🟢→🟡 |
+| 3 | **Interaction Modes** | Ask, Edit, Agent — when to use each | 🟢→🟡 |
 | 4 | **Agent System** | Built-in agents, custom agents, orchestration | 🟡→🔴 |
 | 5 | **Skills System** | What skills are, how to create and use them | 🟡→🔴 |
 | 6 | **MCP Integration** | GitHub MCP server, custom servers, config | 🟡→💎 |
-| 7 | **Advanced Techniques** | Context management, instructions, workflows | 🔴→💎 |
-| 8 | **Configuration** | config.json, env vars, LSP, permissions | 🟡→💎 |
+| 7 | **Advanced Techniques** | Context management, prompt engineering, CI/CD | 🔴→💎 |
+| 8 | **Configuration** | Settings, themes, keybindings, permissions | 🟡→💎 |
 
-### Learning Activities
+Plus **8 scenario challenges** and a **final exam**.
 
-- **📖 Guided Lessons** — step-by-step walkthroughs with examples
-- **🎯 Quizzes** — multiple choice, fill-in-the-blank, scenario-based
-- **🧩 Scenario Challenges** — real-world workflow simulations
-- **📋 Quick Reference** — comprehensive cheat sheets
-- **🎓 Final Exam** — 20-question certification test
+## 🎮 Features
 
-### Gamification
-
-- **⭐ XP System** — earn experience points for every activity
-- **📈 10 Levels** — Newcomer → Apprentice → ... → CLI Wizard
-- **🏆 20+ Achievements** — unlock badges for milestones
-- **🔥 Streak Tracking** — bonus rewards for consecutive correct answers
-- **💾 Persistent Progress** — your progress saves automatically
+- **Guided Lessons** — step-by-step walkthroughs with examples
+- **Quizzes** — test your knowledge after each module
+- **Scenario Challenges** — real-world workflow simulations
+- **XP & Leveling** — earn points and level up from Newcomer to CLI Wizard
+- **Progress Tracking** — persistent progress via SQL across sessions
 
 ## 🏗️ Architecture
 
 ```
-mastery.py              # Main entry point & navigation
-├── engine/
-│   ├── ui.py           # Terminal UI (colors, boxes, menus, animations)
-│   ├── progress.py     # XP, levels, achievements, persistence
-│   └── quiz.py         # Quiz engine (multiple question types)
-└── modules/
-    ├── slash_commands.py      # Module 1: All slash commands
-    ├── keyboard_shortcuts.py  # Module 2: All keyboard shortcuts
-    ├── modes.py               # Module 3: Interaction modes
-    ├── agents.py              # Module 4: Agent system
-    ├── skills.py              # Module 5: Skills system
-    ├── mcp.py                 # Module 6: MCP integration
-    ├── advanced.py            # Module 7: Advanced techniques
-    └── configuration.py       # Module 8: Configuration
+SKILL.md                 # Slim router (492 tokens) — drives the skill
+curriculum/
+├── module-1-slash-commands.md
+├── module-2-keyboard-shortcuts.md
+├── module-3-modes.md
+├── module-4-agents.md
+├── module-5-skills.md
+├── module-6-mcp.md
+├── module-7-advanced.md
+├── module-8-configuration.md
+├── scenarios.md
+└── final-exam.md
 ```
 
-### Design Principles
+SKILL.md stays under the 500-token budget. Curriculum files are loaded on demand via the `view` tool.
 
-- **Zero dependencies** — Python standard library only
-- **Modular** — each module is self-contained, easy to extend
-- **Progressive** — beginner → intermediate → advanced → expert
-- **Interactive** — no walls of text, everything is navigable
-- **Persistent** — progress saves to `~/.copilot-mastery-progress.json`
+## 📄 License
 
-## 📊 Coverage
-
-### Slash Commands (35+)
-`/init` `/agent` `/skills` `/mcp` `/plugin` `/model` `/fleet` `/tasks` `/ide` `/diff` `/review` `/lsp` `/terminal-setup` `/allow-all` `/add-dir` `/list-dirs` `/cwd` `/reset-allowed-tools` `/resume` `/rename` `/context` `/usage` `/session` `/compact` `/share` `/help` `/changelog` `/feedback` `/theme` `/update` `/experimental` `/clear` `/instructions` `/streamer-mode` `/exit` `/quit` `/login` `/logout` `/plan` `/user` `/delegate`
-
-### Keyboard Shortcuts (20+)
-`@` file mentions · `Ctrl+S` · `Shift+Tab` · `Ctrl+T` · `Ctrl+O` · `Ctrl+E` · `↑↓` history · `!` shell bypass · `Esc` · `Ctrl+C` · `Ctrl+D` · `Ctrl+L` · `Ctrl+X→Ctrl+E` · `Ctrl+A` · `Ctrl+H` · `Ctrl+W` · `Ctrl+U` · `Ctrl+K` · `Meta+←→`
-
-### Modes
-Interactive · Plan · Autopilot (experimental)
-
-### Full Feature Coverage
-Agents · Skills · MCP · Custom Instructions · LSP · Session Management · Context Management · Code Review · Permissions · Configuration
-
-## 🎮 How to Use
-
-1. **Run** `python3 mastery.py`
-2. **Choose a module** from the main menu
-3. **Pick an activity** — lesson, quiz, or scenario
-4. **Earn XP** and unlock achievements as you learn
-5. **Take the Final Exam** when you're ready for certification
-
-## 💡 Tips
-
-- Start with modules 1-3 if you're new
-- Use the Quick Reference Card as a cheat sheet
-- Take quizzes to reinforce what you've learned
-- Scenarios simulate real-world workflows
-- The Final Exam requires 80%+ to pass
-- Your progress persists between sessions
+MIT
