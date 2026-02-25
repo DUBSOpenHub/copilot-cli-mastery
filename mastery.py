@@ -25,6 +25,19 @@ from engine.progress import Progress, ACHIEVEMENTS, LEVEL_THRESHOLDS
 
 from modules import slash_commands, keyboard_shortcuts, modes, agents, skills, mcp, advanced, configuration
 
+# ── Module Registry ──────────────────────────────────────────────
+# Adding a module? Just append an entry here — no other file edits needed.
+MODULE_REGISTRY = [
+    {"key": "slash",    "icon": "📖", "color": C.GREEN,   "label": "Slash Commands",       "desc": "all 35+ commands",              "lesson_id": "slash_commands",    "mod": slash_commands},
+    {"key": "keys",     "icon": "⌨️",  "color": C.YELLOW,  "label": "Keyboard Shortcuts",   "desc": "20+ shortcuts",                 "lesson_id": "keyboard_shortcuts","mod": keyboard_shortcuts},
+    {"key": "modes",    "icon": "🔄", "color": C.BLUE,    "label": "Interaction Modes",     "desc": "Interactive, Plan, Autopilot",  "lesson_id": "modes",             "mod": modes},
+    {"key": "agents",   "icon": "🤖", "color": C.MAGENTA, "label": "Agent System",          "desc": "built-in & custom agents",      "lesson_id": "agents",            "mod": agents},
+    {"key": "skills",   "icon": "🎨", "color": C.CYAN,    "label": "Skills System",         "desc": "AI capabilities",               "lesson_id": "skills",            "mod": skills},
+    {"key": "mcp",      "icon": "🔌", "color": C.GREEN,   "label": "MCP Integration",       "desc": "external tools & servers",      "lesson_id": "mcp",               "mod": mcp},
+    {"key": "advanced", "icon": "🚀", "color": C.RED,     "label": "Advanced Techniques",   "desc": "expert workflows",              "lesson_id": "advanced",          "mod": advanced},
+    {"key": "config",   "icon": "⚙️",  "color": C.YELLOW,  "label": "Configuration",         "desc": "config, permissions, LSP",      "lesson_id": "config",            "mod": configuration},
+]
+
 
 def show_dashboard(progress):
     """Show the user's progress dashboard."""
@@ -55,20 +68,10 @@ def show_dashboard(progress):
     # Module completion
     hr(color=C.BRIGHT_BLACK)
     print(f"\n  {C.BOLD}Module Progress:{C.RESET}")
-    module_checks = [
-        ("Slash Commands", "slash_commands"),
-        ("Keyboard Shortcuts", "keyboard_shortcuts"),
-        ("Interaction Modes", "modes"),
-        ("Agent System", "agents"),
-        ("Skills System", "skills"),
-        ("MCP Integration", "mcp"),
-        ("Advanced Techniques", "advanced"),
-        ("Configuration", "config"),
-    ]
-    for name, key in module_checks:
-        done = key in progress.completed_lessons
+    for m in MODULE_REGISTRY:
+        done = m["lesson_id"] in progress.completed_lessons
         icon = f"{C.GREEN}✅{C.RESET}" if done else f"{C.BRIGHT_BLACK}⬜{C.RESET}"
-        print(f"    {icon} {name}")
+        print(f"    {icon} {m['label']}")
     print()
 
 
@@ -337,15 +340,13 @@ def main():
         progress_bar(info['xp_in_level'], info['xp_needed'], width=25,
                      label=f"  ", color=C.BRIGHT_MAGENTA)
 
-        result = menu([
-            (f"📖 {C.GREEN}Slash Commands{C.RESET}        — all 35+ commands", "slash"),
-            (f"⌨️  {C.YELLOW}Keyboard Shortcuts{C.RESET}   — 20+ shortcuts", "keys"),
-            (f"🔄 {C.BLUE}Interaction Modes{C.RESET}     — Interactive, Plan, Autopilot", "modes"),
-            (f"🤖 {C.MAGENTA}Agent System{C.RESET}          — built-in & custom agents", "agents"),
-            (f"🎨 {C.CYAN}Skills System{C.RESET}         — AI capabilities", "skills"),
-            (f"🔌 {C.GREEN}MCP Integration{C.RESET}       — external tools & servers", "mcp"),
-            (f"🚀 {C.RED}Advanced Techniques{C.RESET}   — expert workflows", "advanced"),
-            (f"⚙️  {C.YELLOW}Configuration{C.RESET}         — config, permissions, LSP", "config"),
+        # Build module menu items from registry
+        module_items = []
+        for m in MODULE_REGISTRY:
+            label = f"{m['icon']} {m['color']}{m['label']}{C.RESET}".ljust(40) + f"— {m['desc']}"
+            module_items.append((label, m["key"]))
+
+        result = menu(module_items + [
             (f"🏟️  {C.BRIGHT_CYAN}Scenario Arena{C.RESET}        — real-world challenges", "scenarios"),
             ("", None),
             (f"📊 Dashboard & Progress", "dashboard"),
@@ -362,22 +363,17 @@ def main():
         elif result == "quit":
             print(f"\n  {C.BRIGHT_CYAN}Thanks for training! Keep practicing! 🚀{C.RESET}\n")
             break
-        elif result == "slash":
-            slash_commands.run_lesson(progress)
-        elif result == "keys":
-            keyboard_shortcuts.run_lesson(progress)
-        elif result == "modes":
-            modes.run_lesson(progress)
-        elif result == "agents":
-            agents.run_lesson(progress)
-        elif result == "skills":
-            skills.run_lesson(progress)
-        elif result == "mcp":
-            mcp.run_lesson(progress)
-        elif result == "advanced":
-            advanced.run_lesson(progress)
-        elif result == "config":
-            configuration.run_lesson(progress)
+
+        # Dispatch to registered module
+        dispatched = False
+        for m in MODULE_REGISTRY:
+            if result == m["key"]:
+                m["mod"].run_lesson(progress)
+                dispatched = True
+                break
+
+        if dispatched:
+            continue
         elif result == "dashboard":
             show_dashboard(progress)
             pause()
@@ -419,10 +415,65 @@ def show_splash(progress):
     print(f"  {C.DIM}Type a number to select, 'q' to quit at any time.{C.RESET}")
 
 
+def run_batch_validation():
+    """Non-interactive validation: curriculum + all module imports + progress engine.
+
+    Suitable for CI pipelines. Returns exit code 0 on success, 1 on failure.
+    """
+    from data.validation import validate_curriculum
+
+    errors = []
+
+    # 1. Curriculum coverage
+    curr_errors = validate_curriculum()
+    errors.extend(curr_errors)
+
+    # 2. All modules importable with run_lesson
+    for mod in [slash_commands, keyboard_shortcuts, modes, agents, skills, mcp, advanced, configuration]:
+        if not hasattr(mod, 'run_lesson') or not callable(mod.run_lesson):
+            errors.append(f"Module {mod.__name__} missing callable run_lesson()")
+
+    # 3. Progress engine round-trip
+    import tempfile, json
+    import engine.progress as pm
+    old_save = pm.SAVE_FILE
+    pm.SAVE_FILE = tempfile.mktemp(suffix='.json')
+    try:
+        p = pm.Progress()
+        p.xp = 42
+        p.completed_lessons.add("_ci_test")
+        p.save()
+        p2 = pm.Progress()
+        if p2.xp != 42 or "_ci_test" not in p2.completed_lessons:
+            errors.append("Progress save/load round-trip failed")
+    finally:
+        if os.path.exists(pm.SAVE_FILE):
+            os.remove(pm.SAVE_FILE)
+        pm.SAVE_FILE = old_save
+
+    # 4. Export reference
+    ref_path = export_reference()
+    if not os.path.exists(ref_path):
+        errors.append(f"Reference export failed: {ref_path}")
+
+    if errors:
+        print("Batch validation FAILED:")
+        for err in errors:
+            print(f"  - {err}")
+        return 1
+
+    print("Batch validation PASSED: curriculum, modules, progress, and export all OK.")
+    return 0
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Copilot CLI Mastery Training Tool")
     parser.add_argument("--self-test", action="store_true",
                         help="Validate curriculum coverage and exports, then exit")
+    parser.add_argument("--non-interactive", action="store_true",
+                        help="Run full batch validation (no user input), for CI pipelines")
+    parser.add_argument("--no-color", action="store_true",
+                        help="Disable ANSI color codes in output")
     args = parser.parse_args()
 
     if args.self_test:
@@ -437,6 +488,9 @@ if __name__ == "__main__":
         print(f"Self-test PASSED: curriculum coverage is complete.")
         print(f"Reference exported to: {ref_path}")
         sys.exit(0)
+
+    if args.non_interactive:
+        sys.exit(run_batch_validation())
 
     try:
         main()
