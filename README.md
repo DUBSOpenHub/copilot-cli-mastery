@@ -1,6 +1,9 @@
 # 🎓 Copilot CLI Mastery — Interactive Training System
 
 > **From Zero to CLI Wizard** — Master every feature of the GitHub Copilot CLI through interactive lessons, quizzes, scenarios, and challenges.
+>
+> <img width="811" height="232" alt="Screenshot 2026-02-24 at 11 45 08 PM" src="https://github.com/user-attachments/assets/29d29246-5931-4218-9639-7d49e8bb064f" />
+
 
 ## ⚡ Install as a Copilot CLI Skill
 
