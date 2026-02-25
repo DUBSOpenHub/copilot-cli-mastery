@@ -7,8 +7,32 @@ import shutil
 import textwrap
 
 
-# ANSI color codes
-class C:
+def _colors_enabled():
+    """Check if color output should be enabled.
+
+    Respects the NO_COLOR convention (https://no-color.org/) and the
+    ``--no-color`` CLI flag.
+    """
+    if os.environ.get("NO_COLOR") is not None:
+        return False
+    if "--no-color" in sys.argv:
+        return False
+    return True
+
+
+# ANSI color codes — all attributes become empty strings when color is disabled.
+class _ColorMeta(type):
+    """Metaclass that returns '' for every attribute when colors are off."""
+
+    def __getattribute__(cls, name):
+        if name.startswith("_"):
+            return super().__getattribute__(name)
+        if not _colors_enabled():
+            return ""
+        return super().__getattribute__(name)
+
+
+class C(metaclass=_ColorMeta):
     RESET = "\033[0m"
     BOLD = "\033[1m"
     DIM = "\033[2m"
