@@ -52,7 +52,6 @@ COMMAND_CATEGORIES = {
         ("/resume", "Resume a previous session — continue where you left off"),
         ("/rename", "Rename the current session for easier identification"),
         ("/share", "Share your session (generates a shareable link)"),
-        ("/compact", "Summarize conversation to reduce context usage"),
     ],
     "⚙️ Configuration": [
         ("/instructions", "View or manage custom instruction files"),
