@@ -20,6 +20,25 @@ def _colors_enabled():
     return True
 
 
+def _reduced_motion():
+    """Return True when animations/delays should be skipped.
+
+    Triggers: NO_COLOR, --no-color, --non-interactive, non-TTY stdout,
+    TERM=dumb, or REDUCE_MOTION env var.
+    """
+    if os.environ.get("NO_COLOR") is not None:
+        return True
+    if os.environ.get("REDUCE_MOTION") is not None:
+        return True
+    if os.environ.get("TERM") == "dumb":
+        return True
+    if "--no-color" in sys.argv or "--non-interactive" in sys.argv:
+        return True
+    if not hasattr(sys.stdout, "isatty") or not sys.stdout.isatty():
+        return True
+    return False
+
+
 # ANSI color codes — all attributes become empty strings when color is disabled.
 class _ColorMeta(type):
     """Metaclass that returns '' for every attribute when colors are off."""
@@ -75,6 +94,8 @@ def get_width():
 
 
 def clear():
+    if _reduced_motion():
+        return
     os.system("clear" if os.name != "nt" else "cls")
 
 
@@ -137,6 +158,9 @@ def info_box(title, content, color=C.BLUE):
 
 
 def type_text(text, delay=0.015, color=""):
+    if _reduced_motion():
+        print(color + text + C.RESET)
+        return
     for char in text:
         sys.stdout.write(color + char + C.RESET)
         sys.stdout.flush()
@@ -145,6 +169,9 @@ def type_text(text, delay=0.015, color=""):
 
 
 def slow_print(text, delay=0.005, color=""):
+    if _reduced_motion():
+        print(color + text + C.RESET)
+        return
     for char in text:
         sys.stdout.write(color + char + C.RESET)
         sys.stdout.flush()

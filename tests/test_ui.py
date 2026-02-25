@@ -59,3 +59,47 @@ def test_no_color_flag(monkeypatch):
     monkeypatch.delenv("NO_COLOR", raising=False)
     from engine.ui import C
     assert C.GREEN == ""
+
+
+def test_reduced_motion_no_color(monkeypatch):
+    """NO_COLOR triggers reduced motion."""
+    monkeypatch.setenv("NO_COLOR", "1")
+    from engine.ui import _reduced_motion
+    assert _reduced_motion() is True
+
+
+def test_reduced_motion_env(monkeypatch):
+    """REDUCE_MOTION env var triggers reduced motion."""
+    monkeypatch.delenv("NO_COLOR", raising=False)
+    monkeypatch.setenv("REDUCE_MOTION", "1")
+    from engine.ui import _reduced_motion
+    assert _reduced_motion() is True
+
+
+def test_reduced_motion_dumb_term(monkeypatch):
+    """TERM=dumb triggers reduced motion."""
+    monkeypatch.delenv("NO_COLOR", raising=False)
+    monkeypatch.delenv("REDUCE_MOTION", raising=False)
+    monkeypatch.setenv("TERM", "dumb")
+    from engine.ui import _reduced_motion
+    assert _reduced_motion() is True
+
+
+def test_type_text_skips_delay(monkeypatch, capsys):
+    """type_text prints instantly under reduced motion."""
+    monkeypatch.setenv("NO_COLOR", "1")
+    from engine.ui import type_text
+    import time
+    start = time.monotonic()
+    type_text("Hello, world!" * 10)
+    elapsed = time.monotonic() - start
+    assert elapsed < 0.1
+    assert "Hello" in capsys.readouterr().out
+
+
+def test_clear_noop_when_reduced(monkeypatch):
+    """clear() should be a no-op under reduced motion."""
+    monkeypatch.setenv("NO_COLOR", "1")
+    from engine.ui import clear
+    # Should not raise or call os.system
+    clear()
