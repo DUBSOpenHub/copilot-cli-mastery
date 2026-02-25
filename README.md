@@ -1,6 +1,6 @@
 # 🎓 Copilot CLI Mastery
 
-> **From Zero to CLI Wizard** — Master every feature of the GitHub Copilot CLI through interactive lessons, quizzes, scenarios, and challenges.
+> **From Zero to CLI Wizard** — Learn the GitHub Copilot CLI at your own pace with interactive lessons, quizzes, and hands-on challenges.
 >
 > <img width="811" height="232" alt="Screenshot 2026-02-24 at 11 45 08 PM" src="https://github.com/user-attachments/assets/29d29246-5931-4218-9639-7d49e8bb064f" />
 
