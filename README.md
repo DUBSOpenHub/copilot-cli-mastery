@@ -4,6 +4,11 @@
 >
 > <img width="811" height="232" alt="Screenshot 2026-02-24 at 11 45 08 PM" src="https://github.com/user-attachments/assets/29d29246-5931-4218-9639-7d49e8bb064f" />
 
+> ⚡ **Get started fast!** Clone and run in one line:
+> ```bash
+> git clone https://github.com/DUBSOpenHub/copilot-cli-mastery.git && cd copilot-cli-mastery && python3 mastery.py
+> ```
+
 ## ⚡ Install
 
 ```bash
