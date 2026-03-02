@@ -73,6 +73,6 @@ MIT
 
 ## 🐙 Built with Love
 
-🐙 Built with Love
+Created with 💜 by @DUBSOpenHub with the GitHub Copilot CLI.
 
 Let's build! 🚀✨
