@@ -1,7 +1,7 @@
 name: cli-mastery-eval
-description: Evaluation suite for cli-mastery.
+description: Evaluation suite for cli-mastery skill — validates trigger routing, curriculum accuracy, and boundary behavior.
 skill: cli-mastery
-version: "1.0"
+version: "1.1"
 config:
   trials_per_task: 1
   timeout_seconds: 300
@@ -15,8 +15,8 @@ graders:
       assertions:
         - "len(output) > 0"
   - type: regex
-    name: relevant_content
+    name: cli_relevant
     config:
-      pattern: "(?i)(explain|describe|analyze|implement)"
+      pattern: "(?i)(slash|command|shortcut|mode|agent|skill|mcp|copilot|cli|module)"
 tasks:
   - "tasks/*.yaml"

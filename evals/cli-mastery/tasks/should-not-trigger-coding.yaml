@@ -1,0 +1,15 @@
+id: should-not-trigger-002
+name: Should Not Trigger on General Coding
+description: |
+  Test that the skill does NOT activate on general coding requests
+  that have nothing to do with CLI training.
+tags:
+  - anti-trigger
+  - negative-test
+inputs:
+  prompt: "Write a Python function to sort a list"
+expected:
+  output_not_contains:
+    - "Module"
+    - "XP"
+    - "Newcomer"
