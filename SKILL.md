@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS mastery_completed (module TEXT PRIMARY KEY, completed
 INSERT OR IGNORE INTO mastery_progress (key,value) VALUES ('xp','0'),('level','Newcomer'),('module','0');
 ```
 XP: lesson +20, correct +15, perfect quiz +50, scenario +30.
-Levels: 0=Newcomer 50=Apprentice 150=Navigator 300=Practitioner 500=Specialist 750=Expert 1000=Virtuoso 1200=Architect 1400=Grandmaster 1600=Wizard.
+Levels: 0=Newcomer 100=Apprentice 250=Navigator 400=Practitioner 550=Specialist 700=Expert 850=Virtuoso 1000=Architect 1150=Grandmaster 1500=Wizard.
 Max XP from all content: 1600 (8 modules × 145 + 8 scenarios × 30 + final exam 200).
 
 When module counter exceeds 8 and user says "cliexpert", offer: scenarios, final exam, or review any module.
