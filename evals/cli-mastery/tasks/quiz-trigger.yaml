@@ -1,0 +1,15 @@
+id: quiz-trigger-001
+name: Quiz Trigger
+description: |
+  Test that "quiz me on slash commands" activates the quiz flow
+  and presents questions using ask_user with choices.
+tags:
+  - trigger
+  - quiz
+inputs:
+  prompt: "quiz me on slash commands"
+expected:
+  output_contains:
+    - "command"
+  outcomes:
+    - type: task_completed

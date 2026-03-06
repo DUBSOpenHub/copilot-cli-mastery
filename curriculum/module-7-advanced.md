@@ -7,7 +7,7 @@
 
 2. **`! shell bypass`** — `!git log --oneline -5` runs instantly, no AI overhead
 
-3. **`/delegate`** — Hand off to GitHub's cloud coding agent + open a PR
+3. **`/research`** — Run a deep research investigation using GitHub search and web sources
 
 4. **`/resume` + `--continue`** — Session continuity across CLI launches
 
@@ -23,6 +23,7 @@
    - `.github/instructions/**/*.instructions.md` (path-specific!)
    - `.github/copilot-instructions.md`
    - `~/.copilot/copilot-instructions.md`
+   - `COPILOT_CUSTOM_INSTRUCTIONS_DIRS` (additional directories via env var)
 
 8. **Path-specific instructions:**
    - `.github/instructions/backend.instructions.md` with `applyTo: "src/api/**"`

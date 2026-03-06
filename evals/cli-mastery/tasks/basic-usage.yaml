@@ -1,16 +1,15 @@
 id: basic-usage-001
-name: Basic Usage
+name: Trigger with cliexpert keyword
 description: |
-  Test that the skill handles a typical request correctly.
+  Test that the skill activates when user says "cliexpert" — the primary trigger phrase.
 tags:
   - basic
   - happy-path
+  - trigger
 inputs:
-  prompt: "Help me with this task"
-  files:
-    - path: sample.py
+  prompt: "cliexpert"
 expected:
   output_contains:
-    - "function"
+    - "Module"
   outcomes:
     - type: task_completed

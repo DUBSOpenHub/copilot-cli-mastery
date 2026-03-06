@@ -14,10 +14,10 @@ Present a 10-question comprehensive exam using `ask_user` with 4 choices each. R
 8. Which command compresses conversation history? → `/compact`
 9. Where is MCP configured at project level? → `.github/mcp-config.json`
 10. What does `--yolo` do? → Same as `--allow-all` (skip all confirmations)
-11. What does `/delegate` do? → Spawns a coding agent for a complex task
-12. Which shortcut opens input in $EDITOR? → `Ctrl+X → Ctrl+E`
+11. What does `/research` do? → Run a deep research investigation with sources
+12. Which shortcut opens input in $EDITOR? → `Ctrl+G`
 13. What does `/reset-allowed-tools` do? → Re-enables confirmation prompts
-14. What does triple-pressing Ctrl+C do? → Exits the CLI
+14. Which command copies the last AI response to your clipboard? → `/copy`
 15. What does `/compact` do? → Summarizes conversation to free context
 
 On pass (80%+): Award "CLI Wizard" title, congratulate enthusiastically!

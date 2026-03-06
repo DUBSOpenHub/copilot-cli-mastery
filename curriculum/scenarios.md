@@ -16,7 +16,7 @@ Use `ask_user` with choices for each step.
 ## Scenario 3: Autonomous Refactor Sprint
 > You want an agent to execute a refactor with minimal prompts, but only after reviewing a plan and setting permissions.
 
-**Answer:** `Shift+Tab` (Plan mode) → validate plan → `/delegate` → optionally `/allow-all`
+**Answer:** `Shift+Tab` (Plan mode) → validate plan → `/allow-all` → execute in Autopilot mode
 
 ## Scenario 4: Enterprise Onboarding
 > Set up custom agents, repo instructions, and MCP integration for a new team repository.

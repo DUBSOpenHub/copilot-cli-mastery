@@ -1,11 +1,15 @@
 id: edge-case-001
-name: Edge Case - Empty Input
+name: Direct CLI Question Without Curriculum
 description: |
-  Test that the skill handles edge cases gracefully.
+  Test that the skill answers a specific CLI question directly without
+  forcing the user through curriculum modules.
 tags:
   - edge-case
+  - direct-answer
 inputs:
-  prompt: ""
+  prompt: "What does /compact do in the Copilot CLI?"
 expected:
+  output_contains:
+    - "compact"
   outcomes:
     - type: task_completed

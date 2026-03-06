@@ -1,0 +1,15 @@
+id: reference-trigger-001
+name: Reference Trigger
+description: |
+  Test that asking for a CLI reference or cheat sheet returns
+  a useful summary of commands and shortcuts.
+tags:
+  - trigger
+  - reference
+inputs:
+  prompt: "CLI cheat sheet"
+expected:
+  output_contains:
+    - "/"
+  outcomes:
+    - type: task_completed
