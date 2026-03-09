@@ -12,12 +12,12 @@
 ## ⚡ Install
 
 ```bash
-mkdir -p ~/.copilot/skills/cli-mastery/curriculum
+mkdir -p ~/.copilot/skills/cli-mastery/references
 curl -sSL https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/SKILL.md \
   -o ~/.copilot/skills/cli-mastery/SKILL.md
 for f in module-1-slash-commands module-2-keyboard-shortcuts module-3-modes module-4-agents module-5-skills module-6-mcp module-7-advanced module-8-configuration scenarios final-exam; do
-  curl -sSL "https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/curriculum/${f}.md" \
-    -o ~/.copilot/skills/cli-mastery/curriculum/${f}.md
+  curl -sSL "https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/references/${f}.md" \
+    -o ~/.copilot/skills/cli-mastery/references/${f}.md
 done
 ```
 
@@ -50,7 +50,7 @@ Plus **8 scenario challenges** and a **final exam**.
 
 ```
 SKILL.md                 # Slim router (492 tokens) — drives the skill
-curriculum/
+references/
 ├── module-1-slash-commands.md
 ├── module-2-keyboard-shortcuts.md
 ├── module-3-modes.md
@@ -63,7 +63,7 @@ curriculum/
 └── final-exam.md
 ```
 
-SKILL.md stays under the 500-token budget. Curriculum files are loaded on demand via the `view` tool.
+SKILL.md stays under the 500-token budget. Reference files are loaded on demand via the `view` tool.
 
 ## 📄 License
 
