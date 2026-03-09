@@ -1,40 +1,48 @@
-<!-- BEGIN MICROSOFT SECURITY.md V2.0 -->
-## Security
+# 🔒 Security Policy
 
-Microsoft takes the security of our software products and services seriously, which includes all source code repositories managed through our GitHub organizations, which include [Microsoft](https://github.com/Microsoft), [Azure](https://github.com/Azure), [DotNet](https://github.com/dotnet), [AspNet](https://github.com/aspnet) and [Xamarin](https://github.com/xamarin).
+## Supported Versions
 
-If you believe you have found a security vulnerability in any Microsoft-owned repository that meets [Microsoft's definition of a security vulnerability](https://aka.ms/security.md/definition), please report it to us as described below.
+| Version | Supported          |
+| ------- | ------------------ |
+| latest  | ✅ Yes             |
 
-## Reporting Security Issues
+## Reporting a Vulnerability
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+We take the security of Copilot CLI Mastery seriously. If you discover a security
+vulnerability, please report it responsibly.
 
-Instead, please report them to the Microsoft Security Response Center (MSRC) at [https://msrc.microsoft.com/create-report](https://aka.ms/security.md/msrc/create-report).
+### How to Report
 
-If you prefer to submit without logging in, send email to [secure@microsoft.com](mailto:secure@microsoft.com). If possible, encrypt your message with our PGP key; please download it from the [Microsoft Security Response Center PGP Key page](https://aka.ms/security.md/msrc/pgp).
+1. **Preferred**: Use [GitHub Security Advisories](https://github.com/DUBSOpenHub/copilot-cli-mastery/security/advisories/new)
+   to report vulnerabilities privately.
+2. **Alternative**: Email **security@dubsopenhub.com** with details of the
+   vulnerability.
 
-You should receive a response within 24 hours. If for some reason you do not, please follow up via email to ensure we received your original message. Additional information can be found at [microsoft.com/msrc](https://aka.ms/security.md/msrc).
+**Please do NOT open a public issue for security vulnerabilities.**
 
-Please include the requested information listed below (as much as you can provide) to help us better understand the nature and scope of the possible issue:
+### What to Include
 
-  * Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
-  * Full paths of source file(s) related to the manifestation of the issue
-  * The location of the affected source code (tag/branch/commit or direct URL)
-  * Any special configuration required to reproduce the issue
-  * Step-by-step instructions to reproduce the issue
-  * Proof-of-concept or exploit code (if possible)
-  * Impact of the issue, including how an attacker might exploit the issue
+- Description of the vulnerability
+- Steps to reproduce
+- Potential impact
+- Suggested fix (if any)
 
-This information will help us triage your report more quickly.
+### In Scope
 
-If you are reporting for a bug bounty, more complete reports can contribute to a higher bounty award. Please visit our [Microsoft Bug Bounty Program](https://aka.ms/security.md/msrc/bounty) page for more details about our active programs.
+- Training content that could enable misuse
+- Injection in skill evaluation workflows
+- Credential exposure in configuration
 
-## Preferred Languages
+### Out of Scope
 
-We prefer all communications to be in English.
+- Vulnerabilities in GitHub Copilot CLI itself
+- Vulnerabilities in underlying LLMs
+- Issues requiring physical access to the machine
 
-## Policy
+### Response Timeline
 
-Microsoft follows the principle of [Coordinated Vulnerability Disclosure](https://aka.ms/security.md/cvd).
-
-<!-- END MICROSOFT SECURITY.md -->
+| Action          | Timeframe |
+| --------------- | --------- |
+| Acknowledgment  | 24 hours  |
+| Assessment      | 72 hours  |
+| Fix (if needed) | Best effort, depends on severity |

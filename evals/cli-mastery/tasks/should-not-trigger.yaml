@@ -1,8 +1,8 @@
 id: should-not-trigger-001
-name: Should Not Trigger
+name: Should Not Trigger on Unrelated Prompt
 description: |
   Test that the skill does NOT activate on unrelated prompts.
-  This validates trigger specificity.
+  Weather questions should not invoke CLI training content.
 tags:
   - anti-trigger
   - negative-test
@@ -10,4 +10,6 @@ inputs:
   prompt: "What is the weather today?"
 expected:
   output_not_contains:
-    - "skill activated"
+    - "Module"
+    - "slash command"
+    - "cliexpert"

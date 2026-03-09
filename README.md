@@ -4,9 +4,14 @@
 >
 > <img width="811" height="232" alt="Screenshot 2026-02-24 at 11 45 08 PM" src="https://github.com/user-attachments/assets/29d29246-5931-4218-9639-7d49e8bb064f" />
 
-> ⚡ **Get started fast!** Clone and run in one line:
+> ⚡ **Get started fast!** Install the skill and say "cliexpert":
 > ```bash
-> git clone https://github.com/DUBSOpenHub/copilot-cli-mastery.git && cd copilot-cli-mastery && python3 mastery.py
+> mkdir -p ~/.copilot/skills/cli-mastery/curriculum && \
+>   curl -sSL https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/SKILL.md \
+>     -o ~/.copilot/skills/cli-mastery/SKILL.md && \
+>   for f in module-1-slash-commands module-2-keyboard-shortcuts module-3-modes module-4-agents module-5-skills module-6-mcp module-7-advanced module-8-configuration scenarios final-exam; do \
+>     curl -sSL "https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/curriculum/${f}.md" \
+>       -o ~/.copilot/skills/cli-mastery/curriculum/${f}.md; done
 > ```
 
 ## ⚡ Install
@@ -27,7 +32,7 @@ Then open the Copilot CLI and say **"cliexpert"** to start training.
 
 | # | Module | Topics | Difficulty |
 |---|--------|--------|------------|
-| 1 | **Slash Commands** | All 41 commands across 8 categories | 🟢→🔴 |
+| 1 | **Slash Commands** | All 42 commands across 8 categories | 🟢→🔴 |
 | 2 | **Keyboard Shortcuts** | 19 shortcuts with muscle-memory training | 🟢→🟡 |
 | 3 | **Interaction Modes** | Ask, Edit, Agent — when to use each | 🟢→🟡 |
 | 4 | **Agent System** | Built-in agents, custom agents, orchestration | 🟡→🔴 |
