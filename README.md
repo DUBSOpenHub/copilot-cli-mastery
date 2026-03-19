@@ -4,15 +4,26 @@
 >
 > <img width="811" height="232" alt="Screenshot 2026-02-24 at 11 45 08 PM" src="https://github.com/user-attachments/assets/29d29246-5931-4218-9639-7d49e8bb064f" />
 
-> ⚡ **Get started fast!** Install the skill and say "cliexpert":
+> ### ⚡ One Command. That's It.
+>
+> **Never used the CLI before? No problem.** Follow these 3 steps:
+>
+> **1. Open your terminal**
+> - 🍎 **Mac:** Press `⌘ + Space`, type **Terminal**, hit Enter
+> - 🪟 **Windows:** Press `Win + X`, choose **Terminal** or **PowerShell**
+> - 🐧 **Linux:** Press `Ctrl + Alt + T`
+>
+> **2. Paste this line and press Enter:**
 > ```bash
-> mkdir -p ~/.copilot/skills/cli-mastery/curriculum && \
->   curl -sSL https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/SKILL.md \
->     -o ~/.copilot/skills/cli-mastery/SKILL.md && \
->   for f in module-1-slash-commands module-2-keyboard-shortcuts module-3-modes module-4-agents module-5-skills module-6-mcp module-7-advanced module-8-configuration scenarios final-exam; do \
->     curl -sSL "https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/curriculum/${f}.md" \
->       -o ~/.copilot/skills/cli-mastery/curriculum/${f}.md; done
+> curl -fsSL https://raw.githubusercontent.com/DUBSOpenHub/copilot-cli-mastery/main/quickstart.sh | bash
 > ```
+> *Already have the CLI? No worries — this detects it and skips straight to adding the skill.*
+>
+> **3. When Copilot opens, type:** `cliexpert`
+>
+> That's it — you're training! 🎓
+>
+> *Requires an active [Copilot subscription](https://github.com/features/copilot/plans). [Get one here →](https://github.com/features/copilot/plans)*
 
 ## ⚡ Install
 
